@@ -1,0 +1,376 @@
+/* ====== Reset dasar ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+
+body {
+    background-color: white;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ====== Navbar ====== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+}
+
+header {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0%;
+    position: relative;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* <--- membuat menu di tengah navbar */
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li a {
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    font-family: Montserrat;
+}
+
+.navbar ul li a:hover {
+    color: #2563eb;
+}
+
+.navbar ul li a.active {
+    color: #2563eb;
+  font-weight: bold;
+}
+
+/* ====== Section umum ====== */
+.hero {
+    background: linear-gradient(to bottom, #B0DAFD, #ffffff);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 10%;
+    gap: 40px;
+}
+
+.hero-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 450px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px; /* biar gambar juga punya sudut lembut */
+  margin-bottom: 15px; /* jarak ke teks */
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 280px;
+}
+
+.hero-text h2 {
+  color: #2563eb;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.hero-card-text p {
+  color: black;
+  font-size: 15px;
+}
+
+.hero-buttons {
+    margin-top: 25px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    border: 2px solid #2563eb;
+    color: #2563eb;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* .box-gentwelve {
+    margin: 0 auto;
+    background-color: #B0DAFD;
+    width: 90%;
+    height: 500px;
+    border-radius: 10px;
+} buat box kalo mau */
+
+/* ====== ABOUT ====== */
+#about {
+  opacity: 0;
+  animation: fadeInUp 4s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature.show {
+  animation: slideUp 0.7s ease forwards;
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.feature:nth-child(1).show { animation: slideLeft 1.5s ease forwards; }
+.feature:nth-child(2).show { animation: slideUp 1.5s ease forwards; }
+.feature:nth-child(3).show { animation: slideUp 1.5s ease forwards; }
+.feature:nth-child(4).show { animation: slideRight 1.5s ease forwards; }
+
+section {
+    padding: 80px 10%;
+}
+
+section h3 {
+    font-size: 28px;
+    text-align: center;
+    color: #2563eb;
+}
+
+section p.section-desc {
+    text-align: center;
+    color: black;
+    margin-top: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ====== About ====== */
+#about p {
+    margin-top: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: black;
+}
+
+/* ====== Keunggulan ====== */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    }
+
+.feature {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    height: 300px;
+    
+}
+
+.feature h4 {
+    margin-top: 10px;
+    color: #2563eb;
+}
+
+.feature p {
+    margin-top: 10px;
+    color: black;
+    font-size: 14px;
+}
+
+.feature:hover {
+    border: 2px solid #2563eb;
+    height: 300px;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    padding: 20px;
+}
+
+/* ====== Footer ====== */
+footer {
+    background: linear-gradient(to bottom, #ffffff, #B0DAFD);
+    border-top: 0px solid #ddd; /* BUAT ADA GARIS ATAS BIAR TERLIHAT KOTAK */
+    padding: 50px 10%;
+    color: black;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-grid > div *:first-child {
+  margin-top: 0;
+}
+
+.footer-grid p,
+.footer-grid ul {
+  margin-top: 10px;
+}
+
+footer h5 {
+    color: #2563eb;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Montserrat;
+}
+
+footer p {
+    font-family: Montserrat;
+}
+
+footer ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+footer ul li {
+    margin-top: 5px;
+}
+
+footer a {
+    color: black;
+    font-family: Montserrat;
+}
+
+footer a:hover {
+    color: #2563eb;
+}
+
+/* ====== Ikon Media Sosial di Footer ====== */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #2563eb;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-box:hover {
+  background-color: #2563eb;
+  color: white;
+    border: 2px solid #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+
+html {
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATERI</title>
+  <link rel="stylesheet" href="materi.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+      <!-- NAVBAR -->
+  <header>
+    <div class="navbar">
+        <div class="logo">
+            <img src="/asset/logo.png" alt="Logo GenTwelve">
+      <ul class="nav-links">
+        <li><a href="index.html">BERANDA</a></li>
+        <li><a href="materi.html" class="active">MATERI</a></li>
+        <li><a href="about.html">TENTANG KAMI</a></li>
+      </ul>
+    </div>
+</div>
+  </header>
+
+  <!-- === DAFTAR MATERI === -->
+  <section id="materi" class="section materi">
+    <h2>Daftar Materi Pembelajaran</h2>
+    <p>Pelajari berbagai topik menarik dari mata pelajaran utama.</p>
+    <div class="materi-grid">
+      <div class="card">
+        <h3>Akuntansi</h3>
+        <p>Membentuk keahlian dalam mengelola keuangan secara cermat, teliti, dan profesional untuk menghadapi dunia bisnis modern.</p>
+        <a href="ak.html" class="btn">Pelajari</a>
+      </div>
+
+      <div class="card">
+        <h3>Manajemen Perkantoran</h3>
+        <p>Mempelajari administrasi perkantoran guna menciptakan lingkungan kerja tertata dan produktif.</p>
+        <a href="mp.html" class="btn">Pelajari</a>
+      </div>
+
+      <div class="card">
+        <h3>Bisnis Retail</h3>
+        <p>Mengasah kemampuan strategi penjualan, pelayanan pelanggan, dan pengelolaan usaha agar siap menjadi wirausahawan handal.</p>
+        <a href="br.html" class="btn">Pelajari</a>
+      </div>
+
+      <div class="card">
+        <h3>Rekayasa Perangkat Lunak</h3>
+        <p>Mempelajari cara merancang, membangun, dan mengembangkan aplikasi serta website yang inovatif.</p>
+        <a href="rpl.html" class="btn">Pelajari</a>
+      </div>
+    </div>
+
+    <!-- Judul dan paragraf untuk bagian tambahan -->
+  <h2>Daftar Materi Tambahan</h2>
+  <p>Pelajari juga berbagai pelajaran diluar materi jurusan.</p>
+
+  <!-- Grid kedua -->
+  <div class="materi-grid">
+    <div class="card">
+      <h3>Bahasa Indonesia</h3>
+      <p>Menumbuhkan kecintaan terhadap bahasa sendiri dengan belajar menulis, berbicara, dan memahami karya sastra secara mendalam.</p>
+      <a href="indo.html" class="btn">Pelajari</a>
+    </div>
+    
+    <div class="card">
+      <h3>Matematika</h3>
+      <p>Melatih logika dan kemampuan berpikir kritis untuk memecahkan berbagai persoalan dengan ketepatan dan ketelitian.</p>
+      <a href="mtk.html" class="btn">Pelajari</a>
+    </div>
+
+    <div class="card">
+      <h3>Bahasa Inggris</h3>
+      <p>Meningkatkan kemampuan berkomunikasi global melalui pembelajaran bahasa yang interaktif dan menyenangkan.</p>
+      <a href="bing.html" class="btn">Pelajari</a>
+    </div>
+  </div> <!-- Tutup grid kedua -->
+  <div class="center">
+  <a href="login.html" class="btn-quiz">Kuis</a>
+</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-grid">
+      <div>
+        <h5>GENTWELVE</h5>
+        <p>Belajar Lebih Cerdas. Platform edukasi untuk mempersiapkan masa depan siswa.</p>
+      </div>
+      <div>
+        <h5>LINK CEPAT</h5>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="materi.html">Materi</a></li>
+          <li><a href="about.html">Tentang Kami</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>KONTAK & MEDIA SOSIAL</h5>
+        <p>Gmail: <a href="gentwelve.official@gmail.com">gentwelve.official@gmail.com</a></p>
+        <p>Telp: +62 000-0000-0000</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/gentwelve.official/?igsh=MmNvdmVmYWdudG9u" target="_blank" class="social-box">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@gentwelve.officia?_r=1&_t=ZS-918JWBA1v65" target="_blank" class="social-box">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  const fadeSections = document.querySelectorAll('.section, .materi-grid, .fade-section');
+  const cards = document.querySelectorAll('.card');
+
+  function handleScroll() {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    fadeSections.forEach(sec => {
+      const secTop = sec.getBoundingClientRect().top;
+      const secBottom = sec.getBoundingClientRect().bottom;
+      
+      if (secTop < triggerBottom && secBottom > 0) {
+        sec.classList.add('visible');
+      } else {
+        sec.classList.remove('visible');
+      }
+    });
+
+    // Animasi kartu
+    cards.forEach((card, index) => {
+      const cardTop = card.getBoundingClientRect().top;
+      const cardBottom = card.getBoundingClientRect().bottom;
+
+      if (cardTop < triggerBottom && cardBottom > 0) {
+        setTimeout(() => card.classList.add('show'), index * 150);
+      } else {
+        card.classList.remove('show');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // panggil saat pertama kali
+</script>
+
+</body>
+</html>

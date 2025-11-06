@@ -1,0 +1,305 @@
+/* ====== Reset dasar ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+
+body {
+    background-color: white;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ====== Navbar ====== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+}
+
+header {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0%;
+    position: relative;
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* <--- membuat menu di tengah navbar */
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li a {
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    font-family: Montserrat;
+}
+
+.navbar ul li a:hover {
+    color: #2563eb;
+}
+
+.navbar ul li a.active {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+#about {
+  margin: 0;
+  padding: 0;
+}
+
+.foto-tim {
+  width: 100vw; /* lebar penuh layar */
+  height: 600px; /* sesuaikan tinggi sesuai kebutuhan */
+  background-image: url('asset/');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+    padding: 80px 10%;
+}
+
+/* ====== About ====== */
+section h3 {
+    font-size: 28px;
+    text-align: center;
+    color: #2563eb;
+}
+
+section p.section-desc {
+    text-align: center;
+    color: black;
+    margin-top: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#about p {
+    margin-top: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: black;
+}
+
+/* ====== Tim Kami ====== */
+.team {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px 80px 0 80px;
+}
+
+.member {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.member img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.member h4 {
+    margin-top: 10px;
+    color: #111;
+}
+
+.member p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+
+/* ====== Footer ====== */
+footer {
+    background: linear-gradient(to bottom, #ffffff, #B0DAFD);
+    border-top: 0px solid #ddd; /* BUAT ADA GARIS ATAS BIAR TERLIHAT KOTAK */
+    padding: 50px 10%;
+    color: black;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.footer-grid > div *:first-child {
+  margin-top: 0;
+}
+
+.footer-grid p,
+.footer-grid ul {
+  margin-top: 10px;
+}
+
+footer h5 {
+    color: #2563eb;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Montserrat;
+}
+
+footer p {
+    font-family: Montserrat;
+}
+
+footer ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+footer ul li {
+    margin-top: 5px;
+}
+
+footer a {
+    color: black;
+    font-family: Montserrat;
+}
+
+footer a:hover {
+    color: #2563eb;
+}
+
+/* ====== Ikon Media Sosial di Footer ====== */
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #2563eb;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-box:hover {
+  background-color: #2563eb;
+  color: white;
+    border: 2px solid #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* ====== Animasi muncul untuk judul dan deskripsi TIM ====== */
+#tim h3,
+#tim .section-desc {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+#tim h3.show,
+#tim .section-desc.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ====== Animasi muncul untuk TIM ====== */
+.member {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.6s ease-out;
+}
+
+/* Saat muncul di viewport */
+.member.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Efek hover agar terasa hidup */
+.member:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* ====== Animasi Section ABOUT (fade-in dari redup ke cerah) ====== */
+.foto-tim {
+  opacity: 0;
+  filter: brightness(0.6);
+  transition: all 2s ease-out;
+}
+
+/* Saat muncul di viewport */
+.foto-tim.show {
+  opacity: 1;
+  filter: brightness(1);
+}

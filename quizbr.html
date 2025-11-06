@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Bisnis Retail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Montserrat;
+      background: linear-gradient(to bottom, #B0DAFD, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-container {
+      background: #ffffff;
+      width: 90%;
+      max-width: 550px;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: fadeIn 0.6s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #2563eb;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2563eb;
+      font-size: 26px;
+    }
+
+    #usernameDisplay {
+      text-align: center;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 1.1em;
+    }
+
+    .question {
+      font-family: "Montserrat";
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 1.05em;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .options button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border: 2px solid #2563eb;
+      border-radius: 8px;
+      background: #fff;
+      color: #2563eb;
+      cursor: pointer;
+      font-family: Montserrat;
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .options button::first-letter {
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+
+    .options button:hover {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.02);
+    }
+
+    .options button.correct {
+      background: #4bd200 !important;
+      color: white;
+      border-color: #4bd200;
+    }
+
+    .options button.wrong {
+      background: #cd0000 !important;
+      color: white;
+      border-color: #cd0000;
+    }
+
+    #next-btn {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    #next-btn:hover {
+      background: blue;
+    }
+
+    #score-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.6s;
+    }
+
+    #score-container p {
+      font-size: 1.2em;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    #back-btn, #reset-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      border-color: #2563eb;
+    }
+
+    #back-btn {
+      background: #2563eb;
+      color: white;
+    }
+    #back-btn:hover {
+      background: white;
+      color: #2563eb;
+    }
+
+    #reset-btn {
+      background: #2563eb;
+      color: white;
+      margin-left: 10px;
+    }
+    #reset-btn:hover {
+      background: white;
+      color: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .back-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #2563eb;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-icon:hover {
+      color: #2563eb;
+      transform: translateX(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <!-- Tombol Back -->
+    <button class="back-icon" onclick="window.location.href='menu-quiz.html'">&#8592;</button>
+
+    <h1>📘 Kuis Bisnis Retail</h1>
+    <div id="usernameDisplay"></div>
+
+    <div id="quiz">
+      <div id="question-container">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+      </div>
+      <button id="next-btn">Soal Selanjutnya ➡</button>
+      <div id="score-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // ===== CEK LOGIN =====
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("usernameDisplay").textContent = `👋 Halo, ${currentUser}!`;
+    }
+
+        // ===== IDENTITAS KUIS =====
+    const QUIZ_ID = "br"; // ganti sesuai nama kuis (unik per file)
+    const SCORE_KEY = `score_${QUIZ_ID}_${currentUser}`;
+
+
+  // ===== DATA KUIS MARKETING =====
+  const quizData = [
+    {
+      question: "1. Tujuan utama dari kegiatan marketing adalah...",
+      options: [
+        "A. Membuat produk sebanyak mungkin",
+        "B. Memperkenalkan dan menjual produk kepada konsumen",
+        "C. Menghemat biaya produksi",
+        "D. Mengatur keuangan perusahaan"
+      ],
+      correct: 1
+    },
+    {
+      question: "2. Media promosi digital yang sering digunakan adalah...",
+      options: [
+        "A. Spanduk dan pamflet",
+        "B. Radio dan televisi",
+        "C. Instagram, TikTok, dan YouTube",
+        "D. Telepon rumah dan fax"
+      ],
+      correct: 2
+    },
+    {
+      question: "3. SEO (Search Engine Optimization) berfungsi untuk...",
+      options: [
+        "A. Menghapus data website",
+        "B. Membuat website lebih cepat",
+        "C. Membantu website muncul di hasil pencarian Google",
+        "D. Mengubah tampilan media sosial"
+      ],
+      correct: 2
+    },
+    {
+      question: "4. Yang termasuk alat transaksi non-tunai adalah...",
+      options: [
+        "A. Uang logam",
+        "B. Kartu debit dan e-wallet",
+        "C. Cek fisik",
+        "D. Voucher belanja"
+      ],
+      correct: 1
+    },
+    {
+      question: "5. Urutan penggunaan mesin POS yang benar adalah...",
+      options: [
+        "A. Closing shift → Opening shift → Transaksi",
+        "B. Transaksi → Closing shift → Opening shift",
+        "C. Opening shift → Transaksi → Closing shift",
+        "D. Transaksi → Opening shift → Closing shift"
+      ],
+      correct: 2
+    },
+    {
+      question: "6. Salah satu alasan e-wallet semakin populer dibanding uang tunai adalah...",
+      options: [
+        "A. Membutuhkan waktu lama untuk transaksi",
+        "B. Harus selalu online",
+        "C. Lebih praktis dan cepat digunakan",
+        "D. Hanya bisa digunakan di toko besar"
+      ],
+      correct: 2
+    },
+    {
+      question: "7. Sifat yang wajib dimiliki oleh seorang customer service adalah...",
+      options: [
+        "A. Galak dan tegas",
+        "B. Ramah dan komunikatif",
+        "C. Pendiam dan tertutup",
+        "D. Egois dan cepat marah"
+      ],
+      correct: 1
+    },
+    {
+      question: "8. Tugas utama customer service dalam perusahaan adalah...",
+      options: [
+        "A. Mengatur jadwal pegawai",
+        "B. Menyusun laporan keuangan",
+        "C. Melayani dan membantu pelanggan",
+        "D. Membuat strategi promosi"
+      ],
+      correct: 2
+    },
+    {
+      question: "9. Dalam bidang RPL, kegiatan marketing bisa dilakukan dengan cara...",
+      options: [
+        "A. Membuat website atau aplikasi promosi produk",
+        "B. Membuat laporan keuangan",
+        "C. Mendesain logo perusahaan",
+        "D. Mengatur jadwal pegawai"
+      ],
+      correct: 0
+    },
+    {
+      question: "10. Hubungan antara sistem POS dan database adalah...",
+      options: [
+        "A. Database menyimpan data transaksi dari sistem POS",
+        "B. POS digunakan untuk menggambar grafik",
+        "C. Database hanya berfungsi sebagai media promosi",
+        "D. Keduanya tidak saling berhubungan"
+      ],
+      correct: 0
+    }
+  ];
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const scoreContainer = document.getElementById("score-container");
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // ===== TAMPILKAN PERTANYAAN =====
+    function showQuestion() {
+      const q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.onclick = () => selectAnswer(button, index);
+        optionsEl.appendChild(button);
+      });
+
+      // 🔧 Ubah teks tombol kalau sudah di soal terakhir
+      if (currentQuestion === quizData.length - 1) {
+        nextBtn.textContent = "Selesai";
+      } else {
+        nextBtn.textContent = "Soal Selanjutnya";
+      }
+
+      nextBtn.style.display = "none";
+    }
+
+    // ===== PILIH JAWABAN =====
+    function selectAnswer(selectedBtn, index) {
+      const q = quizData[currentQuestion];
+      const buttons = optionsEl.querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (index === q.correct) {
+        selectedBtn.classList.add("correct");
+        score++;
+      } else {
+        selectedBtn.classList.add("wrong");
+        buttons[q.correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "block";
+    }
+
+    // ===== LANJUT KE SOAL BERIKUTNYA =====
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        showQuestion();
+      } else {
+        showScore();
+      }
+    });
+
+    // ===== TAMPILKAN SKOR =====
+    function showScore() {
+      document.getElementById("question-container").style.display = "none";
+      nextBtn.style.display = "none";
+      scoreContainer.style.display = "block";
+      scoreContainer.innerHTML = `
+        <h2> Kuis Selesai!</h2>
+        <p>Skor kamu: <strong>${score} / ${quizData.length}</strong></p>
+        <p>${
+          score >= 4 ? "Hebat! Kamu paham banget " :
+          score >= 2 ? "Bagus! Tapi masih bisa lebih baik" :
+          "Tetap semangat, ayo belajar lagi"
+        }</p>
+        <button id="back-btn" onclick="window.location.href='index.html'"> Kembali ke Beranda</button>
+        <button id="reset-btn" onclick="resetQuiz()"> Ulangi Kuis</button>
+      `;
+
+       localStorage.setItem(SCORE_KEY, String(score));
+    }
+
+    function resetQuiz() {
+      localStorage.removeItem(SCORE_KEY);
+      location.reload();
+    }
+
+    const savedScore = localStorage.getItem(SCORE_KEY);
+    if (savedScore !== null && !isNaN(savedScore)) {
+      score = parseInt(savedScore, 10);
+      showScore();
+    } else {
+      showQuestion();
+    }
+  </script>
+</body>
+</html>

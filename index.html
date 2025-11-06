@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BERANDA</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="navbar">
+        <div class="logo">
+            <img src="/asset/logo.png" alt="Logo GenTwelve">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">BERANDA</a></li>
+        <li><a href="materi.html" class="active1">MATERI</a></li>
+        <li><a href="about.html" class="active2">TENTANG KAMI</a></li>
+      </ul>
+    </div>
+</div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-text">
+      <h2>GenTwelve</h2>
+      <p><em>Tempat Ilmu Bertemu Inovasi.</em></p>
+      <p>Platform edukasi digital yang membantu siswa memahami pelajaran dengan cara yang seru, interaktif, dan mudah dipahami. Ikuti quiz interaktif dan program belajar yang dirancang khusus untuk kebutuhanmu.</p>
+      <div class="hero-buttons">
+        <a href="materi.html" class="btn btn-primary">Mulai Belajar Sekarang</a>
+      </div>
+    </div>
+    <div class="hero-card">
+    <img src="/asset/belajar.jpg" alt="Ilustrasi siswa belajar online">
+        <div class="hero-card-text">
+            <p>Belajar kapan saja, di mana saja — dengan materi yang mudah dipahami.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+   <div class="box-gentwelve">
+      <section id="about">
+        <h3>Tentang GenTwelve</h3>
+          <p>Gentwelve merupakan perpaduan dari kata “Genius” dan “Twelve”, yang mencerminkan kecerdasan dan identitas SMKN 12.
+Nama ini menggambarkan semangat kami sebagai generasi yang cerdas, kreatif, dan inovatif dalam menghadapi era digital.
+
+Dengan Gentwelve, kami ingin menunjukkan bahwa siswa SMKN 12 siap berinovasi, berkembang, dan memberikan kontribusi nyata bagi kemajuan teknologi dan pendidikan.</p>
+      <p><em>Dari siswa, untuk siswa — kami ingin membuat belajar menjadi menyenangkan dan efektif.</em></p>
+      </section>
+    </div>
+
+  <!-- KEUNGGULAN -->
+  <section id="keunggulan">
+    <h3>Mengapa Belajar di GenTwelve?</h3>
+    <p class="section-desc">Keunggulan kami dirancang khusus untuk:</p>
+    <div class="features">
+      <div class="feature">
+        <div>🎯</div>
+        <h4>Akses Materi Belajar yang Praktis</h4>
+        <p>Siswa dapat mempelajari berbagai materi secara online dengan mudah dan kapan saja tanpa harus membuka buku.</p>
+      </div>
+      <div class="feature">
+        <div>💡</div>
+        <h4>Kuis untuk Mengukur Pemahaman</h4>
+        <p>Tersedia fitur kuis membantu siswa menguji sejauh mana pemahaman mereka terhadap materi yang telah dipelajari.</p>
+      </div>
+      <div class="feature">
+        <div>⏰</div>
+        <h4>Mendukung Pembelajaran Digital</h4>
+        <p>Gentwelve menjadi langkah awal sekolah berbasis teknologi dengan cara yang modern, menarik, dan efisien.</p>
+      </div>
+      <div class="feature">
+        <div>📈</div>
+        <h4>Tampilan Sederhana dan Ramah Pengguna</h4>
+        <p>Desain web dibuat agar mudah digunakan oleh semua kalangan, termasuk siswa dan guru, tanpa memerlukan keahlian teknis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-grid">
+      <div>
+        <h5>GENTWELVE</h5>
+        <p>Belajar Lebih Cerdas. Platform edukasi untuk mempersiapkan masa depan siswa.</p>
+      </div>
+      <div>
+        <h5>LINK CEPAT</h5>
+        <ul>
+          <li><a href="#hero">Beranda</a></li>
+          <li><a href="materi.html">Materi</a></li>
+          <li><a href="about.html">Tentang Kami</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>KONTAK & MEDIA SOSIAL</h5>
+        <p>Gmail: <a href="gentwelve.official@gmail.com">gentwelve.official@gmail.com</a></p>
+        <p>Telp: +62 000-0000-0000</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/gentwelve.official/?igsh=MmNvdmVmYWdudG9u" target="_blank" class="social-box">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@gentwelve.officia?_r=1&_t=ZS-918JWBA1v65" target="_blank" class="social-box">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+  const features = document.querySelectorAll('.feature');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Tambahkan class 'show' saat masuk layar
+        entry.target.classList.add('show');
+      } else {
+        // Hapus class 'show' saat keluar layar (biar bisa animasi lagi nanti)
+        entry.target.classList.remove('show');
+      }
+    });
+  }, { threshold: 0.2 }); // 0.2 = mulai aktif ketika 20% elemen terlihat
+
+  features.forEach(feature => observer.observe(feature));
+</script>
+</body>
+</html>

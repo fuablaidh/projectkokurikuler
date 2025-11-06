@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Bahasa Inggris</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Montserrat;
+      background: linear-gradient(to bottom, #B0DAFD, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-container {
+      background: #ffffff;
+      width: 90%;
+      max-width: 550px;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: fadeIn 0.6s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #2563eb;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2563eb;
+      font-size: 26px;
+    }
+
+    #usernameDisplay {
+      text-align: center;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 1.1em;
+    }
+
+    .question {
+      font-family: "Montserrat";
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 1.05em;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .options button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      border: 2px solid #2563eb;
+      border-radius: 8px;
+      background: #fff;
+      color: #2563eb;
+      cursor: pointer;
+      font-family: Montserrat;
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .options button::first-letter {
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+
+    .options button:hover {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.02);
+    }
+
+    .options button.correct {
+      background: #4bd200 !important;
+      color: white;
+      border-color: #4bd200;
+    }
+
+    .options button.wrong {
+      background: #cd0000 !important;
+      color: white;
+      border-color: #cd0000;
+    }
+
+    #next-btn {
+      display: none;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    #next-btn:hover {
+      background: blue;
+    }
+
+    #score-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.6s;
+    }
+
+    #score-container p {
+      font-size: 1.2em;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    #back-btn, #reset-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      border-color: #2563eb;
+    }
+
+    #back-btn {
+      background: #2563eb;
+      color: white;
+    }
+    #back-btn:hover {
+      background: white;
+      color: #2563eb;
+    }
+
+    #reset-btn {
+      background: #2563eb;
+      color: white;
+      margin-left: 10px;
+    }
+    #reset-btn:hover {
+      background: white;
+      color: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .back-icon {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #2563eb;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .back-icon:hover {
+      color: #2563eb;
+      transform: translateX(-3px);
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <!-- Tombol Back -->
+    <button class="back-icon" onclick="window.location.href='menu-quiz.html'">&#8592;</button>
+
+    <h1>📘 Kuis Bahasa Inggris</h1>
+    <div id="usernameDisplay"></div>
+
+    <div id="quiz">
+      <div id="question-container">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+      </div>
+      <button id="next-btn">Soal Selanjutnya ➡</button>
+      <div id="score-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // ===== CEK LOGIN =====
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("usernameDisplay").textContent = `👋 Halo, ${currentUser}!`;
+    }
+
+    // Unique ID for this quiz — change per quiz file
+  const QUIZ_ID = "basing"; // <- gunakan "basing" untuk kuis Bahasa Inggris
+  const SCORE_KEY = `score_${QUIZ_ID}_${currentUser}`;
+
+  // ===== QUIZ DATA =====
+  const quizData = [
+    {
+      question: "1. “How do you do?” is used when …",
+      options: [
+        "A. We meet our close friends",
+        "B. We meet someone for the first time",
+        "C. We say goodbye",
+        "D. We are angry"
+      ],
+      correct: 1
+    },
+    {
+      question: "2. “Can I borrow your pen?” – “Sure, ____.”",
+      options: [
+        "A. I can",
+        "B. Here you are",
+        "C. Thank you",
+        "D. You can’t"
+      ],
+      correct: 1
+    },
+    {
+      question: "3. The plural form of child is …",
+      options: [
+        "A. childs",
+        "B. children",
+        "C. childes",
+        "D. childer"
+      ],
+      correct: 1
+    },
+    {
+      question: "4. Rina ____ to school every morning.",
+      options: [
+        "A. go",
+        "B. goes",
+        "C. going",
+        "D. gone"
+      ],
+      correct: 1
+    },
+    {
+      question: "5. The text “Please keep silent in the library” is a …",
+      options: [
+        "A. Warning",
+        "B. Notice",
+        "C. Invitation",
+        "D. Announcement"
+      ],
+      correct: 1
+    },
+    {
+      question: "6. The opposite of noisy is …",
+      options: [
+        "A. quiet",
+        "B. crowded",
+        "C. loud",
+        "D. busy"
+      ],
+      correct: 0
+    },
+    {
+      question: "7. “He was sick yesterday.” The tense is …",
+      options: [
+        "A. Simple present",
+        "B. Simple past",
+        "C. Present continuous",
+        "D. Future tense"
+      ],
+      correct: 1
+    },
+    {
+      question: "8. “They will visit Bali next month.” shows …",
+      options: [
+        "A. Present action",
+        "B. Past event",
+        "C. Future plan",
+        "D. Habitual action"
+      ],
+      correct: 2
+    },
+    {
+      question: "9. “Please close the door.” means …",
+      options: [
+        "A. Giving advice",
+        "B. Asking for help",
+        "C. Giving instruction",
+        "D. Making invitation"
+      ],
+      correct: 2
+    },
+    {
+      question: "10. “You must study hard.” The word must expresses …",
+      options: [
+        "A. Permission",
+        "B. Obligation",
+        "C. Ability",
+        "D. Possibility"
+      ],
+      correct: 1
+    }
+  ];
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const scoreContainer = document.getElementById("score-container");
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // ===== TAMPILKAN PERTANYAAN =====
+    function showQuestion() {
+      const q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.onclick = () => selectAnswer(button, index);
+        optionsEl.appendChild(button);
+      });
+
+      // 🔧 Ubah teks tombol kalau sudah di soal terakhir
+      if (currentQuestion === quizData.length - 1) {
+        nextBtn.textContent = "Selesai";
+      } else {
+        nextBtn.textContent = "Soal Selanjutnya";
+      }
+
+      nextBtn.style.display = "none";
+    }
+
+    // ===== PILIH JAWABAN =====
+    function selectAnswer(selectedBtn, index) {
+      const q = quizData[currentQuestion];
+      const buttons = optionsEl.querySelectorAll("button");
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (index === q.correct) {
+        selectedBtn.classList.add("correct");
+        score++;
+      } else {
+        selectedBtn.classList.add("wrong");
+        buttons[q.correct].classList.add("correct");
+      }
+
+      nextBtn.style.display = "block";
+    }
+
+    // ===== LANJUT KE SOAL BERIKUTNYA =====
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        showQuestion();
+      } else {
+        showScore();
+      }
+    });
+
+    // ===== TAMPILKAN SKOR =====
+    function showScore() {
+      document.getElementById("question-container").style.display = "none";
+      nextBtn.style.display = "none";
+      scoreContainer.style.display = "block";
+      scoreContainer.innerHTML = `
+        <h2> Kuis Selesai!</h2>
+        <p>Skor kamu: <strong>${score} / ${quizData.length}</strong></p>
+        <p>${
+          score >= 4 ? "Hebat! Kamu paham banget " :
+          score >= 2 ? "Bagus! Tapi masih bisa lebih baik" :
+          "Tetap semangat, ayo belajar lagi"
+        }</p>
+        <button id="back-btn" onclick="window.location.href='index.html'"> Kembali ke Beranda</button>
+        <button id="reset-btn" onclick="resetQuiz()"> Ulangi Kuis</button>
+      `;
+
+     // Simpan skor dengan key khusus kuis ini
+    localStorage.setItem(SCORE_KEY, String(score));
+  }
+
+  function resetQuiz() {
+    localStorage.removeItem(SCORE_KEY);
+    location.reload();
+  }
+
+  // Cek apakah user sudah mengerjakan kuis ini (gunakan key spesifik kuis)
+  const savedScore = localStorage.getItem(SCORE_KEY);
+  if (savedScore !== null && !isNaN(savedScore)) {
+    score = parseInt(savedScore, 10);
+    showScore();
+  } else {
+    showQuestion();
+  }
+  </script>
+</body>
+</html>
